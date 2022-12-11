@@ -4,7 +4,7 @@ import "./update.css";
 import { useState } from "react";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { update, remove } from "../../redux/userSlice";
+import { updateUser } from "../../redux/apiCalls";
 
 export default function Update() {
   const user = useSelector(state=>state.user)
@@ -20,12 +20,12 @@ export default function Update() {
 
   function handleUpdate(e) {
     e.preventDefault();
-    dispatch(update({name,email}))
+    updateUser({name,email}, dispatch)
   }
 
   function handleDelete(e) {
     e.preventDefault();
-    dispatch(remove())
+    // dispatch(remove())
   }
 
 
@@ -53,7 +53,7 @@ export default function Update() {
               <input
                 className="formInput"
                 type="text"
-                placeholder={user.name}
+                placeholder={user.userInfo.name}
                 onChange={e=>setName(e.target.value)}
               />
             </div>
@@ -62,7 +62,7 @@ export default function Update() {
               <input
                 className="formInput"
                 type="text"
-                placeholder={user.email}
+                placeholder={user.userInfo.email}
                 onChange={e=>setEmail(e.target.value)}
               />
             </div>
