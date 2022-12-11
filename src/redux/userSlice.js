@@ -18,11 +18,7 @@ export const userSlice = createSlice({
             state.name = "";
             state.email = "";
             
-        },
-        addHello: (state, action) => {
-            state.name = "Hello " + action.payload.name;
         }
-        // cmt#1d Add hello action 
 
     }
 });
