@@ -10,8 +10,9 @@ export const updateuser2 = createAsyncThunk("users/update", async (user) => {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(user),
-      })
-      return response.data;
+      });
+      const data = await response.json();
+      return data;
 })
 
 
@@ -28,10 +29,34 @@ export const userSlice = createSlice({
         success: false,
         closeSuccess: true
     },
-    reducers: {}
+    // reducers: {},
+    // if we used one more api call then we have to create another extraReducers below and do the same for it 
+    extraReducers: {
+        [updateuser2.pending]: (state) => {
+            state.pending = true;
+            state.closeSuccess = false;
+            state.error = false;
+        },
+        [updateuser2.fulfilled]: (state, action) => {
+            state.userInfo = action.payload;
+            state.pending = false;
+            state.closeSuccess = false;
+            state.error = false;
+            state.success = true;
+
+        },
+        [updateuser2.rejected]: (state) => {
+            state.pending = false;
+            state.closeSuccess = false;
+            state.error = true;
+            state.success = false;
+
+        }
+    },
+    
 });
 
-export const {  } = userSlice.actions;
+// export const {   } = userSlice.actions;
 export default userSlice.reducer;
 
 
@@ -62,6 +87,7 @@ export default userSlice.reducer;
 //         updateStart: (state) => {
 //             state.pending = true;
 //             state.closeSuccess = false;
+//             state.error = false;
 //         },
 //         updateSuccess: (state, action) => {
 //             state.pending = false;
