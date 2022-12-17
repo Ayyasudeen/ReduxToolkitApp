@@ -9,7 +9,12 @@ import { updateuser2 } from "../../redux/userSlice";
 
 export default function Update() {
   const user = useSelector(state=>state.user)
-  const [name, setName] = useState("");
+  const [name, setName] = useState(() => {
+    // getting stored value
+    const saved = localStorage.getItem("name");
+    const initialValue = JSON.parse(saved);
+    return initialValue || "";
+  });
   const [email, setEmail] = useState("");
   const [isSuccess, setIsSuccess] = useState(false);
 
@@ -22,10 +27,16 @@ export default function Update() {
         setIsSuccess(false);
              }, 1000);
     };
+    localStorage.setItem('name', JSON.stringify(name));
   }
 
   useEffect(() => {
       handleSuccessDisplay();
+      const getname = JSON.parse(localStorage.getItem('name'));
+      if (getname) {
+        setName(getname);
+      }
+      
   }, [user])
   
   
@@ -71,7 +82,7 @@ export default function Update() {
               <input
                 className="formInput"
                 type="text"
-                placeholder={user.userInfo.name}
+                placeholder={name}
                 onChange={e=>setName(e.target.value)}
               />
             </div>
