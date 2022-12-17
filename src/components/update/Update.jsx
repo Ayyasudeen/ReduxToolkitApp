@@ -96,8 +96,8 @@ export default function Update() {
               Update
             </button>
             {user.pending && <span > Loading...</span>}
-            {isSuccess && <span> Successfully Updated</span>}
-            {user.error && <span> Error Occurred</span>}
+            {isSuccess && <span style={{color: "green"}}> Successfully Updated</span>}
+            {user.error && <span style={{color: "red"}}> Error Occurred</span>}
           </form>
         </div>
       </div>
