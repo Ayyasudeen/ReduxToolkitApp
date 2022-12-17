@@ -1,5 +1,5 @@
-npm start -----> To start the react app
-npm run service -----> To run the server 
+## npm start -----> To start the react app
+## npm run service -----> To run the server 
 
 
 
