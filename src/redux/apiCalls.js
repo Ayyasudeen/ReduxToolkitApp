@@ -1,4 +1,4 @@
-import { updateStart, updateSuccess, updateFailure } from "./userSlice";
+import { updateStart, updateSuccess, updateFailure, updateSuccessClose } from "./userSlice";
 
 export const updateUser = async (user, dispatch) => {
   dispatch(updateStart());
@@ -13,6 +13,9 @@ export const updateUser = async (user, dispatch) => {
     dispatch(updateFailure());
   } else {
     const data = await response.json();
-    dispatch(updateSuccess(data))
+    dispatch(updateSuccess(data));
+    setTimeout(() => {
+        dispatch(updateSuccessClose());
+    }, 1000);
   }
 };

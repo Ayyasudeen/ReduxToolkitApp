@@ -73,9 +73,13 @@ export default function Update() {
             <button
               className="updateButton"
               onClick={handleUpdate}
+              disabled={user.pending && !user.closeSuccess ? true : false}
             >
               Update
             </button>
+            {user.pending && <span > Loading...</span>}
+            {user.success && <span> Successfully Updated</span>}
+            {user.error && <span> Error Occurred</span>}
           </form>
         </div>
       </div>
