@@ -1,3 +1,8 @@
+npm start -----> To start the react app
+npm run service -----> To run the server 
+
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
