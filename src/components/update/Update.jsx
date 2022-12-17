@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Warning from "../warning/Warning";
 import "./update.css";
 import { useState } from "react";
@@ -11,8 +11,24 @@ export default function Update() {
   const user = useSelector(state=>state.user)
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
+  const [isSuccess, setIsSuccess] = useState(false);
 
   const dispatch = useDispatch();
+
+  function handleSuccessDisplay() {
+    if (user.success === true) {
+      setIsSuccess(true);
+      setTimeout(() => {
+        setIsSuccess(false);
+             }, 1000);
+    };
+  }
+
+  useEffect(() => {
+      handleSuccessDisplay();
+  }, [user])
+  
+  
 
   const userDetails = {
     name: name,
@@ -75,12 +91,12 @@ export default function Update() {
             <button
               className="updateButton"
               onClick={handleUpdate}
-              disabled={user.pending && !user.closeSuccess ? true : false}
+              disabled={user.pending || isSuccess}
             >
               Update
             </button>
             {user.pending && <span > Loading...</span>}
-            {user.success && <span> Successfully Updated</span>}
+            {isSuccess && <span> Successfully Updated</span>}
             {user.error && <span> Error Occurred</span>}
           </form>
         </div>

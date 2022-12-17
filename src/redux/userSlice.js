@@ -27,27 +27,24 @@ export const userSlice = createSlice({
         pending: false,
         error: false,
         success: false,
-        closeSuccess: true
     },
     // reducers: {},
     // if we used one more api call then we have to create another extraReducers below and do the same for it 
     extraReducers: {
         [updateuser2.pending]: (state) => {
             state.pending = true;
-            state.closeSuccess = false;
             state.error = false;
+            state.success = false;
         },
         [updateuser2.fulfilled]: (state, action) => {
             state.userInfo = action.payload;
             state.pending = false;
-            state.closeSuccess = false;
             state.error = false;
             state.success = true;
 
         },
         [updateuser2.rejected]: (state) => {
             state.pending = false;
-            state.closeSuccess = false;
             state.error = true;
             state.success = false;
 
